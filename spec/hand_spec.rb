@@ -60,6 +60,12 @@ describe Hand do
 
         expect(hand.identify).to eq('full house')
       end
+
+      it "should return 'full house' when 'AH AC 2D 2H 2S' is passed" do
+        hand = Hand.new('5H 5C 10D 10H 10S')
+
+        expect(hand.identify).to eq('full house')
+      end
     end
 
     describe "'four of a kind'" do
