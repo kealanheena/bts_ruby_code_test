@@ -19,7 +19,7 @@ class Hand
         return identify_pair(cards_faces)
       end
 
-      return 'flush' if @cards.split.map { |card| card[-1] }.uniq.length == 1
+      return 'flush' if flush?
 
       return 'high card'
     end
@@ -29,6 +29,10 @@ class Hand
 
   private
 
+  def get_cards_suits
+    @cards.split.map { |card| card[-1] }
+  end
+
   def get_cards_faces
     # this actually worked as card[0] but this is better 
     # in case you want to change A J Q K to numeric values
@@ -37,6 +41,10 @@ class Hand
 
   def duplicate_card_faces?(cards_faces)
     cards_faces.uniq().length != REQUIRED_AMOUNT_OF_CARDS
+  end
+
+  def flush?
+    get_cards_suits.uniq.length == 1
   end
 
   def update_array_of_pairs(faces_count, pairs)
