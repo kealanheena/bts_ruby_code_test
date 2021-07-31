@@ -26,10 +26,6 @@ class Hand
 
   private
 
-  def valid_hand?
-    valid_hand?
-  end
-
   # this honestly had me torn because I think it was previously more readable
   # but this is DRYer so I decided to go with that and just explain it with comments
   def valid_hand?
