@@ -33,7 +33,7 @@ describe Hand do
         expect(hand.identify).to eq('one pair')
       end
 
-      it "should return 'one pair' when ''AH AC 2D 10H 5S' is passed" do
+      it "should return 'one pair' when '10C AC 2D 10H 5S' is passed" do
         hand = Hand.new('10C AC 2D 10H 5S')
 
         expect(hand.identify).to eq('one pair')
