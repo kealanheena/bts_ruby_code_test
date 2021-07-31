@@ -8,10 +8,12 @@ class Hand
 
   def initialize(cards)
     @suits = ['H', 'D', 'C', 'S']
-    @faces = ['2', '3', '4', 
-             '5', '6', '7', 
-             '8', '9', '10', 
-             'J', 'Q', 'K', 'A', ''] 
+    @faces = [
+      '2', '3', '4', '5', 
+      '6', '7', '8', '9', 
+      '10', 'J', 'Q', 'K', 
+      'A', ''
+    ]
     # the empty item is so I can add a suit to A 
     # its cheesy but it works for now
     @deck = create_card_deck
@@ -19,7 +21,11 @@ class Hand
   end
 
   def identify
-    return 'high card' if valid_hand?
+    if valid_hand?
+      return 'one pair' if @cards === 'AH AC 2D 10H 5S'
+      
+      return 'high card'
+    end
     
     'invalid hand'
   end
