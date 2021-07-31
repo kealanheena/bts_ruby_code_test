@@ -9,9 +9,9 @@ class Hand
   end
 
   def identify
-    return 'invalid hand' unless right_amount_of_cards?
+    return 'high card' if right_amount_of_cards? && @cards.split.uniq.length === AMOUNT_OF_CARDS
     
-    'high card'
+    'invalid hand'
   end
 
   private
