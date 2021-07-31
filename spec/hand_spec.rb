@@ -27,8 +27,14 @@ describe Hand do
     end
 
     describe "'four of a kind'" do
-      it "should return 'four of a kind' when ''AH AC 2D 10H 5S' is passed" do
+      it "should return 'four of a kind' when 'AH AC 2D 10H 5S' is passed" do
         hand = Hand.new('AH AC AD 10H AS')
+
+        expect(hand.identify).to eq('four of a kind')
+      end
+
+      it "should return 'four of a kind' when 'AH 10C 10D 10H 10S' is passed" do
+        hand = Hand.new('AH 10C 10D 10H 10S')
 
         expect(hand.identify).to eq('four of a kind')
       end
