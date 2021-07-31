@@ -31,6 +31,8 @@ class Hand
         
         return pairs[0] if pairs.length == 1
         
+        return 'two pair' if pairs.uniq().length == 1
+
         return 'full house'
       end
 

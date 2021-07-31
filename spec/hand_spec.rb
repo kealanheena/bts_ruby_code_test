@@ -27,7 +27,7 @@ describe Hand do
     end
 
     describe "'one pair'" do
-      it "should return 'one pair' when ''AH AC 2D 10H 5S' is passed" do
+      it "should return 'one pair' when 'AH AC 2D 10H 5S' is passed" do
         hand = Hand.new('AH AC 2D 10H 5S')
 
         expect(hand.identify).to eq('one pair')
@@ -37,6 +37,20 @@ describe Hand do
         hand = Hand.new('10C AC 2D 10H 5S')
 
         expect(hand.identify).to eq('one pair')
+      end
+    end
+
+    describe "'two pair'" do
+      it "should return 'two pair' when '5H 2C 2D 10H 5S' is passed" do
+        hand = Hand.new('5H 2C 2D 10H 5S')
+
+        expect(hand.identify).to eq('two pair')
+      end
+
+      it "should return 'two pair' when '10C AC AD 10H 5S' is passed" do
+        hand = Hand.new('10C AC AD 10H 5S')
+
+        expect(hand.identify).to eq('two pair')
       end
     end
 
@@ -61,7 +75,7 @@ describe Hand do
         expect(hand.identify).to eq('full house')
       end
 
-      it "should return 'full house' when 'AH AC 2D 2H 2S' is passed" do
+      it "should return 'full house' when '5H 5C 10D 10H 10S' is passed" do
         hand = Hand.new('5H 5C 10D 10H 10S')
 
         expect(hand.identify).to eq('full house')
