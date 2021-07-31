@@ -17,13 +17,12 @@ class Hand
     # the empty item is so I can add a suit to A 
     # its cheesy but it works for now
     @deck = create_card_deck
-    @cards = cards.upcase()
+    @cards = cards.upcase
   end
 
   def identify
     if valid_hand?
-      face_hand = @cards.split.map { |card| card[0] }
-      return 'one pair' if face_hand.uniq().length != REQUIRED_AMOUNT_OF_CARDS
+      return 'one pair' if duplicate_card_faces?
       
       return 'high card'
     end
@@ -32,6 +31,14 @@ class Hand
   end
 
   private
+
+  def get_cards_faces
+    @cards.split.map { |card| card[0] }
+  end
+
+  def duplicate_card_faces?
+    get_cards_faces.uniq().length != REQUIRED_AMOUNT_OF_CARDS
+  end
 
   # this honestly had me torn because I think it was previously more readable
   # but this is DRYer so I decided to go with that and just explain it with comments
