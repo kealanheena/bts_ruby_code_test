@@ -1,21 +1,15 @@
-class Hand
+require 'deck'
 
+class Hand
   # no magic numbers
   REQUIRED_AMOUNT_OF_CARDS = 5
   AMOUNT_OF_CARDS_IN_A_DECK = 52
 
   attr_reader :cards
 
-  def initialize(cards)
-    @suits = ['H', 'D', 'C', 'S']
-    @faces = ['2', '3', '4', '5', 
-              '6', '7', '8', '9', 
-              '10', 'J', 'Q', 'K', 
-              'A', '']
-    # the empty item is so I can add a suit to A 
-    # its cheesy but it works for now
-    @deck = create_card_deck
+  def initialize(cards, deck = Deck.new())
     @cards = cards.upcase
+    @deck = deck
   end
 
   def identify
@@ -24,6 +18,8 @@ class Hand
       if duplicate_card_faces?(cards_faces)
         return identify_pair(cards_faces)
       end
+
+      return 'flush' if @cards.split.map { |card| card[-1] }.uniq.length == 1
 
       return 'high card'
     end
@@ -34,7 +30,9 @@ class Hand
   private
 
   def get_cards_faces
-    @cards.split.map { |card| card[0] }
+    # this actually worked as card[0] but this is better 
+    # in case you want to change A J Q K to numeric values
+    @cards.split.map { |card| card[0...-1] }
   end
 
   def duplicate_card_faces?(cards_faces)
@@ -85,10 +83,6 @@ class Hand
     # 2. checking if the amount of remaining cards the same as 
     #    AMOUNT_OF_CARDS_IN_A_DECK minus REQUIRED_AMOUNT_OF_CARDS
     (@deck - @cards.split()).length == AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
-  end
-
-  def create_card_deck
-    @suits.map { |suit| @faces.join("#{suit} ").split }.flatten
   end
 
 end

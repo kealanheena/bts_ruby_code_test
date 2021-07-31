@@ -2,10 +2,17 @@ require 'hand'
 
 describe Hand do
 
+  before(:each) do
+    @deck = ["2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH", 
+             "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD", 
+             "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC", 
+             "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS"] 
+  end
+
   describe "#initialize" do
     it "should initialize with a string and save that as an instance variable" do
       cards = 'AH KC 2D 10H 5S'
-      hand = Hand.new(cards)
+      hand = Hand.new(cards, @deck)
 
       expect(hand.cards).to eq(cards)
     end
@@ -14,13 +21,13 @@ describe Hand do
   describe "#identify" do
     describe "'high card'" do
       it "should return 'high card' when 'AH KC 2D 10H 5S' is passed" do
-        hand = Hand.new('AH KC 2D 10H 5S')
+        hand = Hand.new('AH KC 2D 10H 5S', @deck)
 
         expect(hand.identify).to eq('high card')
       end
 
       it "should return 'high card' when 'AH KC 2C 10H 5S' is passed regardless of capitalization" do
-        hand = Hand.new('AH Kc 2C 10H 5s')
+        hand = Hand.new('AH Kc 2C 10H 5s', @deck)
 
         expect(hand.identify).to eq('high card')
       end
@@ -28,13 +35,13 @@ describe Hand do
 
     describe "'one pair'" do
       it "should return 'one pair' when 'AH AC 2D 10H 5S' is passed" do
-        hand = Hand.new('AH AC 2D 10H 5S')
+        hand = Hand.new('AH AC 2D 10H 5S', @deck)
 
         expect(hand.identify).to eq('one pair')
       end
 
       it "should return 'one pair' when '10C AC 2D 10H 5S' is passed" do
-        hand = Hand.new('10C AC 2D 10H 5S')
+        hand = Hand.new('10C AC 2D 10H 5S', @deck)
 
         expect(hand.identify).to eq('one pair')
       end
@@ -42,13 +49,13 @@ describe Hand do
 
     describe "'two pair'" do
       it "should return 'two pair' when '5H 2C 2D 10H 5S' is passed" do
-        hand = Hand.new('5H 2C 2D 10H 5S')
+        hand = Hand.new('5H 2C 2D 10H 5S', @deck)
 
         expect(hand.identify).to eq('two pair')
       end
 
       it "should return 'two pair' when '10C AC AD 10H 5S' is passed" do
-        hand = Hand.new('10C AC AD 10H 5S')
+        hand = Hand.new('10C AC AD 10H 5S', @deck)
 
         expect(hand.identify).to eq('two pair')
       end
@@ -56,27 +63,41 @@ describe Hand do
 
     describe "'three of a kind'" do
       it "should return 'three of a kind' when 'AH AC AD 10H 5S' is passed" do
-        hand = Hand.new('AH AC AD 10H 5S')
+        hand = Hand.new('AH AC AD 10H 5S', @deck)
 
         expect(hand.identify).to eq('three of a kind')
       end
 
       it "should return 'three of a kind' when 'AH 5C 10D 10H 10S' is passed" do
-        hand = Hand.new('AH 5C 10D 10H 10S')
+        hand = Hand.new('AH 5C 10D 10H 10S', @deck)
 
         expect(hand.identify).to eq('three of a kind')
       end
     end
 
+    describe "'flush'" do
+      it "should return 'full house' when '2H 5H AH 9H 10H' is passed" do
+        hand = Hand.new('2H 5H AH 9H 10H', @deck)
+
+        expect(hand.identify).to eq('flush')
+      end
+
+      it "should return 'flush' when '2S 5S AS 9S 10S' is passed" do
+        hand = Hand.new('2S 5S AS 9S 10S', @deck)
+
+        expect(hand.identify).to eq('flush')
+      end
+    end
+
     describe "'full house'" do
       it "should return 'full house' when 'AH AC 2D 2H 2S' is passed" do
-        hand = Hand.new('AH AC 2D 2H 2S')
+        hand = Hand.new('AH AC 2D 2H 2S', @deck)
 
         expect(hand.identify).to eq('full house')
       end
 
       it "should return 'full house' when '5H 5C 10D 10H 10S' is passed" do
-        hand = Hand.new('5H 5C 10D 10H 10S')
+        hand = Hand.new('5H 5C 10D 10H 10S', @deck)
 
         expect(hand.identify).to eq('full house')
       end
@@ -84,13 +105,13 @@ describe Hand do
 
     describe "'four of a kind'" do
       it "should return 'four of a kind' when 'AH AC AD 10H AS' is passed" do
-        hand = Hand.new('AH AC AD 10H AS')
+        hand = Hand.new('AH AC AD 10H AS', @deck)
 
         expect(hand.identify).to eq('four of a kind')
       end
 
       it "should return 'four of a kind' when 'AH 10C 10D 10H 10S' is passed" do
-        hand = Hand.new('AH 10C 10D 10H 10S')
+        hand = Hand.new('AH 10C 10D 10H 10S', @deck)
 
         expect(hand.identify).to eq('four of a kind')
       end
@@ -98,26 +119,26 @@ describe Hand do
 
     describe "'invalid hand'" do
       it "should return 'invalid hand' when duplicate cards are passed" do
-        hand = Hand.new('AH 12H QH KS JL')
+        hand = Hand.new('AH 12H QH KS JL', @deck)
 
         expect(hand.identify).to eq('invalid hand')
       end
 
       it "should return 'invalid hand' when duplicate cards are passed" do
-        hand = Hand.new('AH AH QH KS JC')
+        hand = Hand.new('AH AH QH KS JC', @deck)
 
         expect(hand.identify).to eq('invalid hand')
       end
 
       describe "when the wrong amount of cards are passed" do
         it "should return 'invalid hand' when less than 5 cards are passed" do
-          hand = Hand.new('AH KC')
+          hand = Hand.new('AH KC', @deck)
 
           expect(hand.identify).to eq('invalid hand')
         end
 
         it "should return 'invalid hand' when more than 5 cards are passed" do
-          hand = Hand.new('AH KC 2D 10H 5S QH')
+          hand = Hand.new('AH KC 2D 10H 5S QH', @deck)
 
           expect(hand.identify).to eq('invalid hand')
         end
