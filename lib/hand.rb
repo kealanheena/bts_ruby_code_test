@@ -8,12 +8,10 @@ class Hand
 
   def initialize(cards)
     @suits = ['H', 'D', 'C', 'S']
-    @faces = [
-      '2', '3', '4', '5', 
-      '6', '7', '8', '9', 
-      '10', 'J', 'Q', 'K', 
-      'A', ''
-    ]
+    @faces = ['2', '3', '4', '5', 
+              '6', '7', '8', '9', 
+              '10', 'J', 'Q', 'K', 
+              'A', '']
     # the empty item is so I can add a suit to A 
     # its cheesy but it works for now
     @deck = create_card_deck
@@ -24,16 +22,7 @@ class Hand
     if valid_hand?
       cards_faces = get_cards_faces
       if duplicate_card_faces?(cards_faces)
-        pairs = []
-        faces_count = get_faces_count(cards_faces)
-
-        check_pairs(faces_count, pairs)
-        
-        return pairs[0] if pairs.length == 1
-        
-        return 'two pair' if pairs.uniq().length == 1
-
-        return 'full house'
+        return identify_pair(cards_faces)
       end
 
       return 'high card'
@@ -52,15 +41,7 @@ class Hand
     cards_faces.uniq().length != REQUIRED_AMOUNT_OF_CARDS
   end
 
-  # this returns a hash with the card face (key) and 
-  # the amount of that face in this hand (value)
-  def get_faces_count(cards_faces)
-    cards_faces.each_with_object(Hash.new(0)) { |key, hash| 
-      hash[key] += 1 
-    }
-  end
-
-  def check_pairs(faces_count, pairs)
+  def update_array_of_pairs(faces_count, pairs)
     faces_count.each do |_key, value|
       case value
         when 4
@@ -71,6 +52,27 @@ class Hand
           pairs << 'one pair'
       end
     end
+  end
+
+  def identify_pair(cards_faces)
+    pairs = []
+    faces_count = get_faces_count(cards_faces)
+
+    update_array_of_pairs(faces_count, pairs)
+    
+    return pairs[0] if pairs.length == 1
+    
+    return 'two pair' if pairs.uniq().length == 1
+
+    return 'full house'
+  end
+
+  # this returns a hash with the card face (key) and 
+  # the amount of that face in this hand (value)
+  def get_faces_count(cards_faces)
+    cards_faces.each_with_object(Hash.new(0)) { |key, hash| 
+      hash[key] += 1 
+    }
   end
 
   # this honestly had me torn because I think it was previously more readable
