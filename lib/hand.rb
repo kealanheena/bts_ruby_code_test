@@ -34,7 +34,7 @@ class Hand
 
       return 'high card'
     end
-    
+
     'invalid hand'
   end
 
@@ -62,6 +62,8 @@ class Hand
         when 4
           pairs << 'four of a kind'
           break
+        when 3
+          pairs << 'three of a kind'
         when 2
           pairs << 'one pair'
       end
