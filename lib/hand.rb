@@ -1,5 +1,7 @@
 class Hand
 
+  AMOUNT_OF_CARDS = 5
+
   attr_reader :cards
 
   def initialize(cards)
@@ -7,7 +9,9 @@ class Hand
   end
 
   def identify
-    return 'invalid hand'
+    return 'invalid hand' unless cards.split.length === AMOUNT_OF_CARDS 
+    
+    'high card'
   end
 
 end
