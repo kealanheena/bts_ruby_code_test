@@ -12,8 +12,14 @@ describe Hand do
   end
 
   describe "#identify" do
-    it "should return 'invalid hand' when 'AH KC 2D 10H 5S' is passed" do
+    it "should return 'high card' when 'AH KC 2D 10H 5S' is passed" do
       hand = Hand.new('AH KC 2D 10H 5S')
+
+      expect(hand.identify).to eq('high card')
+    end
+
+    it "should return 'high card' when 'AH KC 2D 10H 5S' is passed regardless of capitalization" do
+      hand = Hand.new('AH Kc 2d 10H 5s')
 
       expect(hand.identify).to eq('high card')
     end
