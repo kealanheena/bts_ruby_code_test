@@ -11,4 +11,12 @@ describe Hand do
     end
   end
 
+  describe "#identify" do
+    it "should return 'invalid hand' when 'AH KC' is passed" do
+      hand = Hand.new('AH KC')
+
+      expect(hand.identify).to eq('invalid hand')
+    end
+  end
+
 end
