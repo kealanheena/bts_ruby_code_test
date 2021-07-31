@@ -18,12 +18,16 @@ class Hand
   end
 
   def identify
-    return 'high card' if right_amount_of_cards? && no_duplicates? && valid_cards?
+    return 'high card' if valid_hand?
     
     'invalid hand'
   end
 
   private
+
+  def valid_hand?
+    right_amount_of_cards? && no_duplicates? && valid_cards?
+  end
 
   def valid_cards?
     (@deck - @cards.split()).length === AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
