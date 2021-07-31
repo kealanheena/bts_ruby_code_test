@@ -9,7 +9,7 @@ class Hand
   end
 
   def identify
-    return 'high card' if right_amount_of_cards? && @cards.split.uniq.length === AMOUNT_OF_CARDS
+    return 'high card' if right_amount_of_cards? && no_duplicates?
     
     'invalid hand'
   end
@@ -18,6 +18,10 @@ class Hand
 
   def right_amount_of_cards?
     @cards.split.length === AMOUNT_OF_CARDS 
+  end
+
+  def no_duplicates?
+    @cards.split.uniq.length === AMOUNT_OF_CARDS
   end
 
 end
