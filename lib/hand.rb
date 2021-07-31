@@ -1,5 +1,6 @@
 class Hand
 
+  # no magic numbers
   REQUIRED_AMOUNT_OF_CARDS = 5
   AMOUNT_OF_CARDS_IN_A_DECK = 52
 
@@ -26,19 +27,19 @@ class Hand
   private
 
   def valid_hand?
-    right_amount_of_cards? && no_duplicates? && valid_cards?
+    valid_hand?
   end
 
-  def valid_cards?
+  # this honestly had me torn because I think it was previously more readable
+  # but this is DRYer so I decided to go with that and just explain it with comments
+  def valid_hand?
+    # what we're doing is:
+    # 1. removing our hand from the deck
+    #    • it will only remove the valid cards
+    #    • it will only remove a card once
+    # 2. checking if the amount of remaining cards the same as 
+    #    AMOUNT_OF_CARDS_IN_A_DECK minus REQUIRED_AMOUNT_OF_CARDS
     (@deck - @cards.split()).length === AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
-  end
-
-  def right_amount_of_cards?
-    @cards.split().length === REQUIRED_AMOUNT_OF_CARDS 
-  end
-
-  def no_duplicates?
-    @cards.split().uniq().length === REQUIRED_AMOUNT_OF_CARDS
   end
 
   def create_card_deck
