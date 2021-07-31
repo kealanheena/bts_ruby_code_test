@@ -18,10 +18,18 @@ describe Hand do
       expect(hand.identify).to eq('high card')
     end
 
-    it "should return 'invalid hand' when 'AH KC' is passed" do
-      hand = Hand.new('AH KC')
+    describe "when the wrong amount of cards are passed" do
+      it "should return 'invalid hand' when less than 5 cards are passed" do
+        hand = Hand.new('AH KC')
 
-      expect(hand.identify).to eq('invalid hand')
+        expect(hand.identify).to eq('invalid hand')
+      end
+
+      it "should return 'invalid hand' when more than 5 cards are passed" do
+        hand = Hand.new('AH KC 2D 10H 5S QH')
+
+        expect(hand.identify).to eq('invalid hand')
+      end
     end
   end
 
