@@ -22,8 +22,16 @@ class Hand
 
   def identify
     if valid_hand?
-      return 'one pair' if duplicate_card_faces?
-      
+      cards_faces = get_cards_faces
+      if duplicate_card_faces?(cards_faces)
+        pairs = []
+        faces_count = get_faces_count(cards_faces)
+
+        check_pairs(faces_count, pairs)
+
+        return pairs[0]
+      end
+
       return 'high card'
     end
     
@@ -36,8 +44,28 @@ class Hand
     @cards.split.map { |card| card[0] }
   end
 
-  def duplicate_card_faces?
-    get_cards_faces.uniq().length != REQUIRED_AMOUNT_OF_CARDS
+  def duplicate_card_faces?(cards_faces)
+    cards_faces.uniq().length != REQUIRED_AMOUNT_OF_CARDS
+  end
+
+  # this returns a hash with the card face (key) and 
+  # the amount of that face in this hand (value)
+  def get_faces_count(cards_faces)
+    cards_faces.each_with_object(Hash.new(0)) { |key, hash| 
+      hash[key] += 1 
+    }
+  end
+
+  def check_pairs(faces_count, pairs)
+    faces_count.each do |_key, value|
+      case value
+        when 4
+          pairs << 'four of a kind'
+          break
+        when 2
+          pairs << 'one pair'
+      end
+    end
   end
 
   # this honestly had me torn because I think it was previously more readable

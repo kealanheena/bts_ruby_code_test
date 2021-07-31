@@ -26,6 +26,14 @@ describe Hand do
       end
     end
 
+    describe "'four of a kind'" do
+      it "should return 'four of a kind' when ''AH AC 2D 10H 5S' is passed" do
+        hand = Hand.new('AH AC AD 10H AS')
+
+        expect(hand.identify).to eq('four of a kind')
+      end
+    end
+
     describe "'one pair'" do
       it "should return 'one pair' when ''AH AC 2D 10H 5S' is passed" do
         hand = Hand.new('AH AC 2D 10H 5S')
@@ -47,8 +55,8 @@ describe Hand do
         expect(hand.identify).to eq('high card')
       end
 
-      it "should return 'high card' when 'AH KC 2D 10H 5S' is passed regardless of capitalization" do
-        hand = Hand.new('AH Kc 2d 10H 5s')
+      it "should return 'high card' when 'AH KC 2C 10H 5S' is passed regardless of capitalization" do
+        hand = Hand.new('AH Kc 2C 10H 5s')
 
         expect(hand.identify).to eq('high card')
       end
