@@ -20,6 +20,12 @@ describe Hand do
 
     describe "'invalid hand'" do
       it "should return 'invalid hand' when duplicate cards are passed" do
+        hand = Hand.new('AH 12H QH KS JL')
+
+        expect(hand.identify).to eq('invalid hand')
+      end
+
+      it "should return 'invalid hand' when duplicate cards are passed" do
         hand = Hand.new('AH AH QH KS JC')
 
         expect(hand.identify).to eq('invalid hand')
