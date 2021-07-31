@@ -28,8 +28,10 @@ class Hand
         faces_count = get_faces_count(cards_faces)
 
         check_pairs(faces_count, pairs)
-
-        return pairs[0]
+        
+        return pairs[0] if pairs.length == 1
+        
+        return 'full house'
       end
 
       return 'high card'
@@ -61,7 +63,6 @@ class Hand
       case value
         when 4
           pairs << 'four of a kind'
-          break
         when 3
           pairs << 'three of a kind'
         when 2

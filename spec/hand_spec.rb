@@ -19,38 +19,10 @@ describe Hand do
         expect(hand.identify).to eq('high card')
       end
 
-      it "should return 'high card' when 'AH KC 2D 10H 5S' is passed regardless of capitalization" do
-        hand = Hand.new('AH Kc 2d 10H 5s')
+      it "should return 'high card' when 'AH KC 2C 10H 5S' is passed regardless of capitalization" do
+        hand = Hand.new('AH Kc 2C 10H 5s')
 
         expect(hand.identify).to eq('high card')
-      end
-    end
-
-    describe "'three of a kind'" do
-      it "should return 'three of a kind' when 'AH AC AD 10H 5S' is passed" do
-        hand = Hand.new('AH AC AD 10H 5S')
-
-        expect(hand.identify).to eq('three of a kind')
-      end
-
-      it "should return 'three of a kind' when 'AH 10C 10D 10H 10S' is passed" do
-        hand = Hand.new('AH 5C 10D 10H 10S')
-
-        expect(hand.identify).to eq('three of a kind')
-      end
-    end
-
-    describe "'four of a kind'" do
-      it "should return 'four of a kind' when 'AH AC AD 10H AS' is passed" do
-        hand = Hand.new('AH AC AD 10H AS')
-
-        expect(hand.identify).to eq('four of a kind')
-      end
-
-      it "should return 'four of a kind' when 'AH 10C 10D 10H 10S' is passed" do
-        hand = Hand.new('AH 10C 10D 10H 10S')
-
-        expect(hand.identify).to eq('four of a kind')
       end
     end
 
@@ -68,17 +40,39 @@ describe Hand do
       end
     end
 
-    describe "'high card'" do
-      it "should return 'high card' when 'AH KC 2D 10H 5S' is passed" do
-        hand = Hand.new('AH KC 2D 10H 5S')
+    describe "'three of a kind'" do
+      it "should return 'three of a kind' when 'AH AC AD 10H 5S' is passed" do
+        hand = Hand.new('AH AC AD 10H 5S')
 
-        expect(hand.identify).to eq('high card')
+        expect(hand.identify).to eq('three of a kind')
       end
 
-      it "should return 'high card' when 'AH KC 2C 10H 5S' is passed regardless of capitalization" do
-        hand = Hand.new('AH Kc 2C 10H 5s')
+      it "should return 'three of a kind' when 'AH 5C 10D 10H 10S' is passed" do
+        hand = Hand.new('AH 5C 10D 10H 10S')
 
-        expect(hand.identify).to eq('high card')
+        expect(hand.identify).to eq('three of a kind')
+      end
+    end
+
+    describe "'full house'" do
+      it "should return 'full house' when 'AH AC 2D 2H 2S' is passed" do
+        hand = Hand.new('AH AC 2D 2H 2S')
+
+        expect(hand.identify).to eq('full house')
+      end
+    end
+
+    describe "'four of a kind'" do
+      it "should return 'four of a kind' when 'AH AC AD 10H AS' is passed" do
+        hand = Hand.new('AH AC AD 10H AS')
+
+        expect(hand.identify).to eq('four of a kind')
+      end
+
+      it "should return 'four of a kind' when 'AH 10C 10D 10H 10S' is passed" do
+        hand = Hand.new('AH 10C 10D 10H 10S')
+
+        expect(hand.identify).to eq('four of a kind')
       end
     end
 
