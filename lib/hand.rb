@@ -22,7 +22,8 @@ class Hand
 
   def identify
     if valid_hand?
-      return 'one pair' if @cards === 'AH AC 2D 10H 5S'
+      face_hand = @cards.split.map { |card| card[0] }
+      return 'one pair' if face_hand.uniq().length != REQUIRED_AMOUNT_OF_CARDS
       
       return 'high card'
     end
@@ -41,7 +42,7 @@ class Hand
     #    • it will only remove a card once
     # 2. checking if the amount of remaining cards the same as 
     #    AMOUNT_OF_CARDS_IN_A_DECK minus REQUIRED_AMOUNT_OF_CARDS
-    (@deck - @cards.split()).length === AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
+    (@deck - @cards.split()).length == AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
   end
 
   def create_card_deck
