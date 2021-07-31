@@ -32,6 +32,12 @@ describe Hand do
 
         expect(hand.identify).to eq('three of a kind')
       end
+
+      it "should return 'three of a kind' when 'AH 10C 10D 10H 10S' is passed" do
+        hand = Hand.new('AH 5C 10D 10H 10S')
+
+        expect(hand.identify).to eq('three of a kind')
+      end
     end
 
     describe "'four of a kind'" do
