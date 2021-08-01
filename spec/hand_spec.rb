@@ -131,6 +131,20 @@ describe Hand do
       end
     end
 
+    describe "'straight flush'" do
+      it "should return 'straight flush' when '2H 3H 4H 5H 6H' is passed" do
+        hand = Hand.new('2H 3H 4H 5H 6H', @deck)
+
+        expect(hand.identify).to eq('straight flush')
+      end
+
+      it "should return 'straight flush' when '10S JS QS KS AS' is passed" do
+        hand = Hand.new('10S JS QS KS AS', @deck)
+
+        expect(hand.identify).to eq('straight flush')
+      end
+    end
+
     describe "'invalid hand'" do
       it "should return 'invalid hand' when duplicate cards are passed" do
         hand = Hand.new('AH 12H QH KS JL', @deck)

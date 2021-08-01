@@ -15,15 +15,13 @@ class Hand
   def identify
     if valid_hand?
       cards_faces = get_cards_faces
-      if duplicate_card_faces?(cards_faces)
-        return identify_pair(cards_faces)
-      end
+      return identify_pair(cards_faces) if duplicate_card_faces?(cards_faces)
+
+      return 'straight flush' if straight_flush?
 
       return 'flush' if flush?
       
       return 'straight' if straight?
-
-      # return 'straight flush' if straight_flush?
 
       return 'high card'
     end
@@ -60,7 +58,7 @@ class Hand
   end
 
   def straight?
-    # sort the array and set the first number to check
+    # sort the array and set the first number in array
     sorted_numeric_cards = get_numeric_cards_faces.sort
     previous_card = sorted_numeric_cards[0]
     # go through ech card in the array and check that the it is 
@@ -74,9 +72,9 @@ class Hand
     true
   end
 
-  # def straight_flush?
-  #   straight? && flush?
-  # end
+  def straight_flush?
+    straight? && flush?
+  end
 
   def update_array_of_pairs(faces_count, pairs)
     faces_count.each do |_key, value|
