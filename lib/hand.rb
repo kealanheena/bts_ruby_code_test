@@ -20,6 +20,10 @@ class Hand
       end
 
       return 'flush' if flush?
+      
+      return 'straight' if straight?
+
+      # return 'straight flush' if straight_flush?
 
       return 'high card'
     end
@@ -39,6 +43,14 @@ class Hand
     @cards.split.map { |card| card[0...-1] }
   end
 
+  def get_numeric_cards_faces
+    numeric_values = { 'J' => 11, 'Q' => 12, 'K' => 13, 'A' => 14 }
+    # this returns an array with only the cards faces and replaces 
+    # any instance of J Q K or A with thier numeric value or converts
+    # the string to an integer
+    get_cards_faces.map { |card| numeric_values[card] || card.to_i }
+  end
+
   def duplicate_card_faces?(cards_faces)
     cards_faces.uniq().length != REQUIRED_AMOUNT_OF_CARDS
   end
@@ -46,6 +58,25 @@ class Hand
   def flush?
     get_cards_suits.uniq.length == 1
   end
+
+  def straight?
+    # sort the array and set the first number to check
+    sorted_numeric_cards = get_numeric_cards_faces.sort
+    previous_card = sorted_numeric_cards[0]
+    # go through ech card in the array and check that the it is 
+    # equal to the previous card plus 1 (if it isn't return false)
+    sorted_numeric_cards[1, REQUIRED_AMOUNT_OF_CARDS].each do |card|
+      return false if previous_card + 1 != card
+
+      previous_card = card
+    end
+
+    true
+  end
+
+  # def straight_flush?
+  #   straight? && flush?
+  # end
 
   def update_array_of_pairs(faces_count, pairs)
     faces_count.each do |_key, value|

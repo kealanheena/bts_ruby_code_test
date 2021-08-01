@@ -75,8 +75,22 @@ describe Hand do
       end
     end
 
+    describe "'straight'" do
+      it "should return 'straight' when 'QH 8C JH 10S 9C' is passed" do
+        hand = Hand.new('QH 8C JH 10S 9C', @deck)
+
+        expect(hand.identify).to eq('straight')
+      end
+
+      it "should return 'straight' when '3H 7C 4H 6S 5C' is passed" do
+        hand = Hand.new('3H 7C 4H 6S 5C', @deck)
+
+        expect(hand.identify).to eq('straight')
+      end
+    end
+
     describe "'flush'" do
-      it "should return 'full house' when '2H 5H AH 9H 10H' is passed" do
+      it "should return 'flush' when '2H 5H AH 9H 10H' is passed" do
         hand = Hand.new('2H 5H AH 9H 10H', @deck)
 
         expect(hand.identify).to eq('flush')
