@@ -1,1 +1,1 @@
-# bts_ruby_code_test
+# BTS Ruby Code Test

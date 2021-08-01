@@ -61,7 +61,12 @@ class Hand
     # sort the array and set the first number in array
     sorted_numeric_cards = get_numeric_cards_faces.sort
     previous_card = sorted_numeric_cards[0]
-    # go through ech card in the array and check that the it is 
+    first_card = sorted_numeric_cards[0] 
+    last_card = sorted_numeric_cards[-1]
+
+    return loop_around_straight?(sorted_numeric_cards) if loop_around?(first_card, last_card)
+
+    # go through each card in the array and check that the it is 
     # equal to the previous card plus 1 (if it isn't return false)
     sorted_numeric_cards[1, REQUIRED_AMOUNT_OF_CARDS].each do |card|
       return false if previous_card + 1 != card
@@ -74,6 +79,29 @@ class Hand
 
   def straight_flush?
     straight? && flush?
+  end
+
+  def loop_around_straight?(sorted_numeric_cards)
+    starting_index = 1
+    previous_card = sorted_numeric_cards[0]
+
+    sorted_numeric_cards[starting_index, REQUIRED_AMOUNT_OF_CARDS].each_with_index do |card, index|
+      if previous_card + 1 != card 
+        starting_index = index + 1
+        previous_card = card
+        break
+      end
+
+      previous_card = card
+    end
+
+    sorted_numeric_cards[starting_index + 1, REQUIRED_AMOUNT_OF_CARDS].each do |card|
+      return false if previous_card + 1 != card 
+
+      previous_card = card
+    end
+
+    return true
   end
 
   def update_array_of_pairs(faces_count, pairs)
@@ -108,6 +136,10 @@ class Hand
     cards_faces.each_with_object(Hash.new(0)) { |key, hash| 
       hash[key] += 1 
     }
+  end
+
+  def loop_around?(first_card, last_card)
+    first_card == 2 && last_card == 14
   end
 
   # this honestly had me torn because I think it was previously more readable
