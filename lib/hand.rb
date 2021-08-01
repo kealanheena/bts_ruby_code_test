@@ -7,7 +7,7 @@ class Hand
 
   attr_reader :cards
 
-  def initialize(cards, deck = Deck.new())
+  def initialize(cards, deck = Deck.new().cards)
     @cards = cards.upcase
     @deck = deck
   end
