@@ -1,33 +1,25 @@
-require 'deck'
-
 class Hand
   # no magic numbers
   REQUIRED_AMOUNT_OF_CARDS = 5
-  AMOUNT_OF_CARDS_IN_A_DECK = 52
 
   attr_reader :cards
 
-  def initialize(cards, deck = Deck.new().cards)
+  def initialize(cards)
     @cards = cards.upcase
     @cards_faces = get_cards_faces
     @cards_suits = get_cards_suits
-    @deck = deck
   end
 
   def identify
-    if valid_hand?
-      return identify_pair if duplicate_card_faces?
+    return identify_pair if duplicate_card_faces?
 
-      return 'straight flush' if straight_flush?
+    return 'straight flush' if straight_flush?
 
-      return 'flush' if flush?
+    return 'flush' if flush?
       
-      return 'straight' if straight?
+    return 'straight' if straight?
 
-      return 'high card'
-    end
-
-    "invalid hand: #{get_invalid_hand_type}"
+    return 'high card'
   end
 
   private
@@ -58,16 +50,6 @@ class Hand
     @cards_faces.map { |card| numeric_values[card] || card.to_i }
   end
 
-  def get_invalid_hand_type
-    return 'not enough cards' if @cards.split().length < REQUIRED_AMOUNT_OF_CARDS
-
-    return 'too many cards' if @cards.split().length > REQUIRED_AMOUNT_OF_CARDS
-
-    return 'duplicate cards' if @cards.split().uniq().length < REQUIRED_AMOUNT_OF_CARDS
-
-    'invalid cards'
-  end
-
   def update_pairs_array(faces_count, pairs)
     faces_count.each do |_key, value|
       case value
@@ -92,18 +74,6 @@ class Hand
     return 'two pair' if pairs.uniq().length == 1
 
     return 'full house'
-  end
-
-  # this honestly had me torn because I think it was previously more readable
-  # but this is DRYer so I decided to go with that and just explain it with comments
-  def valid_hand?
-    # what we're doing is:
-    # 1. removing our hand from the deck
-    #    • it will only remove the valid cards
-    #    • it will only remove a card once
-    # 2. checking if the amount of remaining cards the same as 
-    #    AMOUNT_OF_CARDS_IN_A_DECK minus REQUIRED_AMOUNT_OF_CARDS
-    (@deck - @cards.split()).length == AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
   end
 
   def duplicate_card_faces?
