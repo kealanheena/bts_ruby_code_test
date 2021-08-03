@@ -107,6 +107,32 @@ After installing your gems run rspec with the following command:
 $ rspec
 ```
 
-There are 44 tests in totals and the test coverage is at 100.00%.
+There are 43 tests in totals and the test coverage is at 100.00%.
 
 ### Tests
+
+#### Poker
+
+initialize
+
+- should initialize with a hash of key value pairs for the card ranks
+
+rank_hands
+
+- valid hands:
+
+  - should return '1. straight flush' when straight flush is passed
+  - should return '2. four of a kind' when four of a kind is passed
+  - should return '3. full house' when full house is passed
+  - should return '4. flush' when flush is passed
+  - should return '5. straight' when straight is passed
+  - should return '6. three of a kind' when three of a kind is passed
+  - should return '7. two pair' when two pair is passed
+  - should return '8. one pair' when one pair is passed
+  - should return '9. high card' when straight flush is passed
+
+- invalid hands
+  - should return 'invalid hand: not enough cards
+  - should return 'invalid hand: too many cards' when straight flush is passed
+  - should return 'invalid hand: duplicate cards' when straight flush is passed
+  - should return 'invalid hand: invalid cards' when straight flush is passed

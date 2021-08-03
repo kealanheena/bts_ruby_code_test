@@ -22,8 +22,8 @@ describe Poker do
     end
   end
 
-  describe "valid hands" do
-    describe "#rank_hand" do
+  describe "#rank_hand" do
+    describe "valid hands" do
       it "should return '1. straight flush' when straight flush is passed" do
         hand = double("Hand", :cards => '2H 3H 4H 5H 6H', :identify => 'straight flush')
         poker = Poker.new(hand)
@@ -36,13 +36,6 @@ describe Poker do
         poker = Poker.new(hand)
 
         expect(poker.rank_hand).to eq('2. four of a kind')
-      end
-
-      it "should return '3. full house' when full house is passed" do
-        hand = double("Hand", :cards => '2H 3H 4H 5H 6H', :identify => 'full house')
-        poker = Poker.new(hand)
-
-        expect(poker.rank_hand).to eq('3. full house')
       end
 
       it "should return '3. full house' when full house is passed" do
@@ -125,5 +118,4 @@ describe Poker do
       end
     end
   end
-
 end
