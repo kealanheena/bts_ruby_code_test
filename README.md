@@ -109,9 +109,9 @@ $ rspec
 
 There are 43 tests in totals and the test coverage is at 100.00%.
 
-### Tests
+## Tests
 
-#### Poker
+### Poker
 
 initialize
 
@@ -137,7 +137,7 @@ rank_hands
   - should return 'invalid hand: duplicate cards' when straight flush is passed
   - should return 'invalid hand: invalid cards' when straight flush is passed
 
-#### Hand
+### Hand
 
 initialize
 
