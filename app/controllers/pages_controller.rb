@@ -1,9 +1,10 @@
 require 'hand'
+require 'poker'
 
 class PagesController < ApplicationController
   def home
     if session[:hand]
-      @hand = session[:hand]
+      @result = session[:result]
     else
       @error = session[:error]
     end
@@ -11,9 +12,10 @@ class PagesController < ApplicationController
 
   def create
     @hand = Hand.new(params[:poker][:hand]).identify
-
+    
     if @hand
-      session[:hand] = @hand
+      @result = Poker.new().rank_hand(@hand)
+      session[:result] = @result
     else 
       session[:error] = 'error: something went wrong go back and try again'
     end

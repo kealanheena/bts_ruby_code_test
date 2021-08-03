@@ -16,7 +16,7 @@ class Poker
     hand_rank_key = hand_rank.split().join('_')
     hand_rank_num = @ranks[hand_rank_key]
     
-    return "#{hand_rank_num}. #{hand_rank}" if hand_rank_key
+    return "#{hand_rank_num}. #{hand_rank}" if hand_rank_num
 
     "#{hand_rank}"
   end

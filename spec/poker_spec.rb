@@ -22,10 +22,22 @@ describe Poker do
   end
 
   describe "#rank_hand" do
-    it "should return a hash with players and their hands" do
+    it "should return '1. straight flush' when straight flush is passed" do
       poker = Poker.new()
 
       expect(poker.rank_hand('straight flush')).to eq('1. straight flush')
+    end
+
+    it "should return a hash with players and their hands" do
+      poker = Poker.new()
+
+      expect(poker.rank_hand('high card')).to eq('9. high card')
+    end
+
+    it "should return a hash with players and their hands" do
+      poker = Poker.new()
+
+      expect(poker.rank_hand('invalid hand')).to eq('invalid hand')
     end
   end
 
