@@ -53,13 +53,13 @@ describe Hand do
   it "Input: 'QC 10C 7C 6C QC' | Response: 'invalid hand'" do
     hand = Hand.new('QC 10C 7C 6C QC')
 
-    expect(hand.identify).to eq('invalid hand')
+    expect(hand.identify).to eq('invalid hand: duplicate cards')
   end
 
   it "Input: 'JH QH KH' | Response: 'invalid hand'" do
     hand = Hand.new('JH QH KH')
 
-    expect(hand.identify).to eq('invalid hand')
+    expect(hand.identify).to eq('invalid hand: not enough cards')
   end
 
 end

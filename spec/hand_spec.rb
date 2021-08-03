@@ -146,29 +146,45 @@ describe Hand do
     end
 
     describe "'invalid hand'" do
-      it "should return 'invalid hand' when duplicate cards are passed" do
-        hand = Hand.new('AH 12H QH KS JL', @deck)
+      describe "when duplicate cards are passed" do
+        it "should return 'invalid hand: duplicate cards' when duplicate cards are passed" do
+          hand = Hand.new('AH QH QH KS JS', @deck)
 
-        expect(hand.identify).to eq('invalid hand')
-      end
+          expect(hand.identify).to eq('invalid hand: duplicate cards')
+        end
 
-      it "should return 'invalid hand' when duplicate cards are passed" do
-        hand = Hand.new('AH AH QH KS JC', @deck)
+        it "should return 'invalid hand: duplicate cards' when duplicate cards are passed" do
+          hand = Hand.new('AH AH QH KS JC', @deck)
 
-        expect(hand.identify).to eq('invalid hand')
+          expect(hand.identify).to eq('invalid hand: duplicate cards')
+        end
       end
 
       describe "when the wrong amount of cards are passed" do
-        it "should return 'invalid hand' when less than 5 cards are passed" do
+        it "should return 'invalid hand: not enough cards' when less than 5 cards are passed" do
           hand = Hand.new('AH KC', @deck)
 
-          expect(hand.identify).to eq('invalid hand')
+          expect(hand.identify).to eq('invalid hand: not enough cards')
         end
 
-        it "should return 'invalid hand' when more than 5 cards are passed" do
+        it "should return 'invalid hand: too many cards' when more than 5 cards are passed" do
           hand = Hand.new('AH KC 2D 10H 5S QH', @deck)
 
-          expect(hand.identify).to eq('invalid hand')
+          expect(hand.identify).to eq('invalid hand: too many cards')
+        end
+      end
+
+      describe "when invalid cards are passed" do
+        it "should return 'invalid hand: invalid cards' when duplicate cards are passed" do
+          hand = Hand.new('AL 12G QH KS JL', @deck)
+
+          expect(hand.identify).to eq('invalid hand: invalid cards')
+        end
+
+        it "should return 'invalid hand: invalid cards' when duplicate cards are passed" do
+          hand = Hand.new('AA AQ QH KV JC', @deck)
+
+          expect(hand.identify).to eq('invalid hand: invalid cards')
         end
       end
     end

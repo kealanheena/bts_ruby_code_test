@@ -27,7 +27,7 @@ class Hand
       return 'high card'
     end
 
-    'invalid hand'
+    "invalid hand: #{get_invalid_hand_type}"
   end
 
   private
@@ -56,6 +56,16 @@ class Hand
     # any instance of J Q K or A with thier numeric value or converts
     # the string to an integer
     @cards_faces.map { |card| numeric_values[card] || card.to_i }
+  end
+
+  def get_invalid_hand_type
+    return 'not enough cards' if @cards.split().length < REQUIRED_AMOUNT_OF_CARDS
+
+    return 'too many cards' if @cards.split().length > REQUIRED_AMOUNT_OF_CARDS
+
+    return 'duplicate cards' if @cards.split().uniq().length < REQUIRED_AMOUNT_OF_CARDS
+
+    'invalid cards'
   end
 
   def update_pairs_array(faces_count, pairs)
