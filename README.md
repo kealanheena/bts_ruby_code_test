@@ -113,11 +113,11 @@ There are 43 tests in totals and the test coverage is at 100.00%.
 
 ### Poker
 
-initialize
+<strong>initialize:</strong>
 
 - should initialize with a hash of key value pairs for the card ranks
 
-rank_hands
+<strong>rank_hands:</trong>
 
 - valid hands:
 
@@ -139,11 +139,11 @@ rank_hands
 
 ### Hand
 
-initialize
+<strong>initialize:</strong>
 
 - should initialize with a string and save that as an instance variable
 
-identify
+<strong>identify:</strong>
 
 - high card
   - should return 'high card' when 'AH KC 2D 10H 5S' is passed
