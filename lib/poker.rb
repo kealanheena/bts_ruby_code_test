@@ -53,8 +53,6 @@ class Poker
     @hand_cards.split().uniq().length < REQUIRED_AMOUNT_OF_CARDS
   end
 
-  # this honestly had me torn because I think it was previously more readable
-  # but this is DRYer so I decided to go with that and just explain it with comments
   def invalid_hand?
     # what we're doing is:
     # 1. removing our hand from the deck
@@ -62,6 +60,8 @@ class Poker
     #    • it will only remove a card once
     # 2. checking if the amount of remaining cards the same as 
     #    AMOUNT_OF_CARDS_IN_A_DECK minus REQUIRED_AMOUNT_OF_CARDS
+    return true if too_many_cards?
+
     (@deck - @hand_cards.split()).length != AMOUNT_OF_CARDS_IN_A_DECK - REQUIRED_AMOUNT_OF_CARDS
   end
 
