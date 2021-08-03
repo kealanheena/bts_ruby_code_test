@@ -54,3 +54,59 @@ is not required.
 - Use a code formatter or linter
 - Write Unit tests where applicable
 - Include instructions in a README on how to run your application including the test suite
+
+## Technologies
+
+- Ruby on Rails
+- Rspec (testing)
+- Simplecov (test coverage)
+- Rubocop (linter)
+- Git/Github (source control)
+
+## Getting Started
+
+This programme is run on http://localhost:3000/ when run locally.
+
+first open up you terminal and run the following commands:
+
+```
+$ git clone https://github.com/kealanheena/bts_ruby_code_test.git
+
+$ cd bts_ruby_code_test
+```
+
+Then you need to install the gems with bundle install:
+
+```
+$ bundle install
+```
+
+and now you're ready to go run rails in you terminal and go to http://localhost:3000/ and start using the app.
+
+```
+$ rails s
+```
+
+There are more instuctions on the app page on how to use the form.
+
+## Running Rubocop
+
+After installing your gems run rubocop with the following command:
+
+```
+$ rubocop
+```
+
+There should be no offences.
+
+## Running Tests
+
+After installing your gems run rspec with the following command:
+
+```
+$ rspec
+```
+
+There are 44 tests in totals and the test coverage is at 100.00%.
+
+### Tests
