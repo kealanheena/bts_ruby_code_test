@@ -46,12 +46,45 @@ Metrics/LineLength:
   Exclude:
     - "spec/**/*"
     - "test/**/*"
+    - "bin/**/*"
+    - "config/**/*"
+    - "db/**/*"
   Max: 100
 
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
     - "test/**/*"
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "bin/**/*"
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "bin/**/*"
+
+Metrics/MethodLength:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "bin/**/*"
+
+Metrics/AbcSize:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "bin/**/*"
+    - "config/**/*"
+    - "db/**/*"
+
+Lint/HandleExceptions:
+  Exclude:
+    - bin/**/*
 
 # Code Style
 # ==========

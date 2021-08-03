@@ -1,0 +1,21 @@
+<h1>Play Poker!</h1>
+<p>In order to find out youyr hands value please put in a space seperated string of cards represented by the face value of the card and followed by the suit value e.g. 2h 3d 4c 5s 6d</p><br />
+
+<h2>
+  <% if @error %>
+    <%= @error %>
+  <% end %>
+</h2>
+
+<%= form_for :poker, url: identify_hand_path do |f| %>
+  <%= f.label :hand %> <br />
+  <%= f.text_field :hand, :required => true %> <br />
+
+  <%= f.submit "Identify Hand" %> <br />
+<% end %>
+
+<h2>
+  <% if @hand %>
+    <%= @hand %>
+  <% end %>
+</h2>
