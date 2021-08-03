@@ -136,3 +136,39 @@ rank_hands
   - should return 'invalid hand: too many cards' when straight flush is passed
   - should return 'invalid hand: duplicate cards' when straight flush is passed
   - should return 'invalid hand: invalid cards' when straight flush is passed
+
+#### Hand
+
+initialize
+
+- should initialize with a string and save that as an instance variable
+
+identify
+
+- high card
+  - should return 'high card' when 'AH KC 2D 10H 5S' is passed
+  - should return 'high card' when 'AH KC 2C 10H 5S' is passed regardless of capitalization
+- one pair
+  - should return 'one pair' when 'AH AC 2D 10H 5S' is passed
+  - should return 'one pair' when '10C AC 2D 10H 5S
+- two pair
+  - should return 'two pair' when '5H 2C 2D 10H 5S' is passed
+  - should return 'two pair' when '10C AC AD 10H 5S' is passed
+- three of a kind
+  - should return 'three of a kind' when 'AH AC AD 10H 5S' is passed
+  - should return 'three of a kind' when 'AH 5C 10D 10H 10S' is passed
+- straight
+  - should return 'straight' when 'QH 8C JH 10S 9C' is passed
+  - should return 'straight' when '3H 7C 4H 6S 5C' is passed
+- flush
+  - should return 'flush' when '2H 5H AH 9H 10H' is passed
+  - should return 'flush' when '2S 5S AS 9S 10S' is passed
+- full house
+  - should return 'full house' when 'AH AC 2D 2H 2S' is passed
+  - should return 'full house' when '5H 5C 10D 10H 10S' is passed
+- four of a kind
+  - should return 'four of a kind' when 'AH AC AD 10H AS' is passed
+  - should return 'four of a kind' when 'AH 10C 10D 10H 10S' is passed
+- straight flush
+  - should return 'straight flush' when '2H 3H 4H 5H 6H' is passed
+  - should return 'straight flush' when '10S JS QS KS AS' is passed
